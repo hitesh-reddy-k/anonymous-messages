@@ -16,17 +16,14 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 const currentDir = __dirname;
 const newDir = currentDir.replace('backend', 'forentend');
 
-
 const corsOptions = {
     origin: ['https://anoniymous-messages.vercel.app'],
     optionsSuccessStatus: 200,
     credentials: true
 };
 
-
-
 app.use(cors(corsOptions));
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
@@ -37,26 +34,20 @@ app.get('/', (req, res) => {
     res.send('server is working in vercel');
 });
 
-app.get("/anonymousMessages/:reserverid",(req,res)=>{
+app.get("/anonymousMessages/:reserverid", (req, res) => {
     res.sendFile(path.join(newDir, 'anyonemessage.html'));
-})
-
-
+});
 
 app.use(express.json());
 Connect()
-if(!Connect()){
-    console.log("connect database fail")
-}
-else{
-    console.log("connected to database: ", process.env.URL)
-    console.log(newDir)
-}
-
-
-
+    .then(() => {
+        console.log("connected to database: ", process.env.URL);
+        console.log(newDir);
+    })
+    .catch(err => {
+        console.log("connect database fail", err);
+    });
 
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`);
-    
 });
