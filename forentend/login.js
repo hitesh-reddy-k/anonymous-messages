@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const password = document.querySelector('#password').value;
 
         try {
-            const response = await fetch('https://anoniymous-messages-server.vercel.appanonymousMessages/login', {
+            const response = await fetch('https://anoniymous-messages-server.vercel.app/anonymousMessages/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
