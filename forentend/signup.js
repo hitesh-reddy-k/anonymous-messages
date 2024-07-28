@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const conformpassword = document.querySelector('#signup-conformpassword').value;
 
         try {
-            const response = await fetch('http://localhost:5500/anonymousMessages/register', {
+            const response = await fetch('https://anonymous-messages.vercel.app/anonymousMessages/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
