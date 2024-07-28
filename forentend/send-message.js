@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (userId) {
             try {
-                const response = await fetch(`https://anonymousmessages-alpha.vercel.app/anonymousMessages/username/${userId}`);
+                const response = await fetch(`https://anoniymous-messages.vercel.app/anonymousMessages/username/${userId}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch username: ${response.statusText}`);
                 }
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const message = messageInput.value.trim();
                         if (message) {
                             try {
-                                const sendMessageResponse = await fetch(`https://anonymousmessages-alpha.vercel.app/anonymousMessages/send/${userId}`, {
+                                const sendMessageResponse = await fetch(`https://anoniymous-messages.vercel.app/anonymousMessages/send/${userId}`, {
                                     method: "POST",
                                     headers: {
                                         'Content-Type': 'application/json'

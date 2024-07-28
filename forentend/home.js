@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded event fired");
     try {
-        const response = await fetch("https://anonymousmessages-alpha.vercel.app/anonymousMessages/getMessages", {
+        const response = await fetch("https://anoniymous-messages.vercel.app/anonymousMessages/getMessages", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -79,7 +79,7 @@ document.getElementById("deleteAccountLink").addEventListener("click", confirmDe
 async function deleteAccount() {
     try {
         console.log("Initiating account deletion");
-        const response = await fetch("https://anonymousmessages-alpha.vercel.app/anonymousMessages/deleteAccount", {
+        const response = await fetch("https://anoniymous-messages.vercel.app/anonymousMessages/deleteAccount", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

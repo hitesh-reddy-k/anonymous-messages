@@ -307,7 +307,7 @@
 
         async function fetchUsername(userId) {
             try {
-                const usernameResponse = await fetch(`https://anonymousmessages-alpha.vercel.app/anonymousMessages/username/${userId}`);
+                const usernameResponse = await fetch(`https://anoniymous-messages.vercel.app/anonymousMessages/username/${userId}`);
                 
                 if (!usernameResponse.ok) {
                     throw new Error(`Failed to fetch username: ${usernameResponse.statusText}`);
@@ -340,7 +340,7 @@
 
             try {
                 // Sending the message
-                const response = await fetch(`https://anonymousmessages-alpha.vercel.app/anonymousMessages/send/${userId}`, {
+                const response = await fetch(`https://anoniymous-messages.vercel.app/anonymousMessages/send/${userId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
