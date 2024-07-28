@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
   res.send('Server is working in Vercel');
 });
 
-app.get("/anonymousMessages/:reserverid", (req, res) => {
+app.get("/anonymousMessages", (req, res) => {
     console.log("Reserver ID:", req.params.reserverid);
   res.sendFile(path.join(newDir, 'anyonemessage.html'));
 });
