@@ -3,17 +3,18 @@ const dotenv = require('dotenv');
 const cors = require("cors");
 const path = require("path");
 const bodyParser = require('body-parser');
-const app = express();
 const cookieParser = require("cookie-parser");
 const Connect = require("../backend/connectdatabase/mongodb");
 const user = require("../backend/router/userroute");
 const message = require("../backend/router/messageroute");
 
-dotenv.config({ path: "backend/env/cong.env" });
+dotenv.config({ path: "backend/env/config.env" });
+
+const app = express();
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 const currentDir = __dirname;
-const newDir = currentDir.replace('backend', 'forentend');
+const newDir = currentDir.replace('backend', 'frontend');
 
 const corsOptions = {
   origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
@@ -30,23 +31,30 @@ app.use("/anonymousMessages", user);
 app.use("/anonymousMessages", message);
 
 app.get('/', (req, res) => {
-  res.send('server is working in vercel');
+  res.send('Server is working in Vercel');
 });
 
 app.get("/anonymousMessages/:reserverid", (req, res) => {
   res.sendFile(path.join(newDir, 'anyonemessage.html'));
 });
 
+// Improved error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ error: 'Internal Server Error', details: err.message });
+});
+
 app.use(express.json());
+
 Connect()
   .then(() => {
-    console.log("connected to database: ", process.env.URL);
+    console.log("Connected to database:", process.env.URL);
     console.log(newDir);
   })
   .catch(err => {
-    console.log("connect database fail", err);
+    console.error("Failed to connect to database", err);
   });
 
 app.listen(process.env.PORT || 5500, () => {
-  console.log(`Example app listening on port http://localhost:${process.env.PORT || 5500}`);
+  console.log(`Server running on http://localhost:${process.env.PORT || 5500}`);
 });
