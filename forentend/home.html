@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" type="image/png" href="/create-an-logo-for-a-companey-of-name-anonymous-messages-basically-the-anonymous-messages-is-the--489823626.png">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Anonymous-Message</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li><a href="" class="active">Home</a></li>
+                <li><a href="send-message.html">Send Secret Message</a></li>
+                <li><a href="feedbackfourm.html">Feedback</a></li>
+                
+                <li class="profile">
+                    <img src="/create-an-logo-for-a-companey-of-name-anonymous-messages-basically-the-anonymous-messages-is-the--489823626.png" alt="Profile" class="profile-img">
+                    <div class="dropdown-menu">
+                        <a href="me.html">Profile</a>
+                        <a id="deleteAccountLink" href="#" onclick="confirmDeleteAccount()">Delete Account</a>
+                        <a onclick="logout()" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+    <h1 class="headding">Secret-Messages</h1>
+    <div class="messages">
+        
+    </div>
+    <button class="btn" id="screenshotBtn">Take Screenshot</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>
