@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const signupForm = document.getElementById("signup-form");
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const conformpassword = document.querySelector('#signup-conformpassword').value;
 
         try {
-            const response = await fetch('${API_URL}/anonymousMessages/register', {
+            const response = await fetch('https://anoniymous-messages-server.vercel.appanonymousMessages/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

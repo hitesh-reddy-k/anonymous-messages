@@ -1,5 +1,5 @@
 
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const linkInput = document.getElementById("link-input");
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (userId) {
             try {
-                const response = await fetch(`${API_URL}/anonymousMessages/username/${userId}`);
+                const response = await fetch(`https://anoniymous-messages-server.vercel.app/anonymousMessages/username/${userId}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch username: ${response.statusText}`);
                 }
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const message = messageInput.value.trim();
                         if (message) {
                             try {
-                                const sendMessageResponse = await fetch(`${API_URL}/anonymousMessages/send/${userId}`, {
+                                const sendMessageResponse = await fetch(`https://anoniymous-messages-server.vercel.app/anonymousMessages/send/${userId}`, {
                                     method: "POST",
                                     headers: {
                                         'Content-Type': 'application/json'

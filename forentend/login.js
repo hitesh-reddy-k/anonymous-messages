@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.getElementById("password");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const password = document.querySelector('#password').value;
 
         try {
-            const response = await fetch('${API_URL}/anonymousMessages/login', {
+            const response = await fetch('https://anoniymous-messages-server.vercel.appanonymousMessages/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

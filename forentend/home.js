@@ -1,9 +1,9 @@
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded event fired");
     try {
-        const response = await fetch("${API_URL}/anonymousMessages/getMessages", {
+        const response = await fetch("https://anoniymous-messages-server.vercel.app/anonymousMessages/getMessages", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -81,7 +81,7 @@ document.getElementById("deleteAccountLink").addEventListener("click", confirmDe
 async function deleteAccount() {
     try {
         console.log("Initiating account deletion");
-        const response = await fetch("${API_URL}/anonymousMessages/deleteAccount", {
+        const response = await fetch("https://anoniymous-messages-server.vercel.app/anonymousMessages/deleteAccount", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

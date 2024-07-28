@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 document.addEventListener('mousemove', (e) => {
     const x = e.clientX / window.innerWidth * 100;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     try {
-        const response = await fetch("${API_URL}/anonymousMessages/me", {
+        const response = await fetch("https://anoniymous-messages-server.vercel.app/anonymousMessages/me", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -42,9 +42,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             // Populate the form with user data
             username.value = data.users.Username;
             email.value = data.users.email;
-            anonLink.value = `${API_URL}/anonymousMessages/${data.users._id}`;
+            anonLink.value = `https://anoniymous-messages-server.vercel.app/anonymousMessages/${data.users._id}`;
 
-            const messagesResponse = await fetch("${API_URL}/anonymousMessages/getMessages", {
+            const messagesResponse = await fetch("https://anoniymous-messages-server.vercel.app/anonymousMessages/getMessages", {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ document.getElementById("save-button").addEventListener("click", async () => {
     const bio = document.getElementById("bio") ? document.getElementById("bio").value : ''; // Check if bio exists
 
     try {
-        const response = await fetch("${API_URL}/anonymousMessages/updateUsername", {
+        const response = await fetch("https://anoniymous-messages-server.vercel.app/anonymousMessages/updateUsername", {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

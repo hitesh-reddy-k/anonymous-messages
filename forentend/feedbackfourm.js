@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-           const response = await fetch('${API_URL}/anonymousMessages/submit', {
+           const response = await fetch('https://anoniymous-messages-server.vercel.app/anonymousMessages/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
