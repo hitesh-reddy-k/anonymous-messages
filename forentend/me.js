@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     try {
-        const response = await fetch("https://anonymous-messages.vercel.app/anonymousMessages/me", {
+        const response = await fetch("https://anonymousmessages-alpha.vercel.app/anonymousMessages/me", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             // Populate the form with user data
             username.value = data.users.Username;
             email.value = data.users.email;
-            anonLink.value = `https://anonymous-messages.vercel.app/anonymousMessages/${data.users._id}`;
+            anonLink.value = `https://anonymousmessages-alpha.vercel.app/anonymousMessages/${data.users._id}`;
 
-            const messagesResponse = await fetch("https://anonymous-messages.vercel.app/anonymousMessages/getMessages", {
+            const messagesResponse = await fetch("https://anonymousmessages-alpha.vercel.app/anonymousMessages/getMessages", {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ document.getElementById("save-button").addEventListener("click", async () => {
     const bio = document.getElementById("bio") ? document.getElementById("bio").value : ''; // Check if bio exists
 
     try {
-        const response = await fetch("https://anonymous-messages.vercel.app/anonymousMessages/updateUsername", {
+        const response = await fetch("https://anonymousmessages-alpha.vercel.app/anonymousMessages/updateUsername", {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-           const response = await fetch('https://anonymous-messages.vercel.app/anonymousMessages/submit', {
+           const response = await fetch('https://anonymousmessages-alpha.vercel.app/anonymousMessages/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
