@@ -1,3 +1,5 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 document.addEventListener("DOMContentLoaded", function() {
     const signupForm = document.getElementById("signup-form");
 
@@ -10,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const conformpassword = document.querySelector('#signup-conformpassword').value;
 
         try {
-            const response = await fetch('http://localhost:5500/anonymousMessages/register', {
+            const response = await fetch('${API_URL}/anonymousMessages/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

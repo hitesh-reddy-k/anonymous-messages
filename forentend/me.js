@@ -1,3 +1,5 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 document.addEventListener('mousemove', (e) => {
     const x = e.clientX / window.innerWidth * 100;
     const y = e.clientY / window.innerHeight * 100;
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     try {
-        const response = await fetch("http://localhost:5500/anonymousMessages/me", {
+        const response = await fetch("${API_URL}/anonymousMessages/me", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -40,9 +42,9 @@ document.addEventListener("DOMContentLoaded", async function() {
             // Populate the form with user data
             username.value = data.users.Username;
             email.value = data.users.email;
-            anonLink.value = `http://localhost:5500/anonymousMessages/${data.users._id}`;
+            anonLink.value = `${API_URL}/anonymousMessages/${data.users._id}`;
 
-            const messagesResponse = await fetch("http://localhost:5500/anonymousMessages/getMessages", {
+            const messagesResponse = await fetch("${API_URL}/anonymousMessages/getMessages", {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ document.getElementById("save-button").addEventListener("click", async () => {
     const bio = document.getElementById("bio") ? document.getElementById("bio").value : ''; // Check if bio exists
 
     try {
-        const response = await fetch("http://localhost:5500/anonymousMessages/updateUsername", {
+        const response = await fetch("${API_URL}/anonymousMessages/updateUsername", {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',

@@ -1,7 +1,9 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded event fired");
     try {
-        const response = await fetch("http://localhost:5500/anonymousMessages/getMessages", {
+        const response = await fetch("${API_URL}/anonymousMessages/getMessages", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -79,7 +81,7 @@ document.getElementById("deleteAccountLink").addEventListener("click", confirmDe
 async function deleteAccount() {
     try {
         console.log("Initiating account deletion");
-        const response = await fetch("http://localhost:5500/anonymousMessages/deleteAccount", {
+        const response = await fetch("${API_URL}/anonymousMessages/deleteAccount", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

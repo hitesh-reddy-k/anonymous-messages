@@ -1,3 +1,5 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.getElementById("password");
     const openEyesImage = document.getElementById("icon");
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const password = document.querySelector('#password').value;
 
         try {
-            const response = await fetch('http://localhost:5500/anonymousMessages/login', {
+            const response = await fetch('${API_URL}/anonymousMessages/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

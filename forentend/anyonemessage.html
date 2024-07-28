@@ -300,6 +300,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const pathArray = window.location.pathname.split('/');
+        const API_URL = process.env.REACT_APP_API_URL;
         const userId = pathArray[pathArray.length - 1]; // Correctly get userId from URL
         const recommendedUsername = document.getElementById("recommended-username");
         const recommendationContainer = document.getElementById("recommendation-container");
@@ -307,7 +308,7 @@
 
         async function fetchUsername(userId) {
             try {
-                const usernameResponse = await fetch(`http://localhost:5500/anonymousMessages/username/${userId}`);
+                const usernameResponse = await fetch(`${API_URL}/anonymousMessages/username/${userId}`);
                 
                 if (!usernameResponse.ok) {
                     throw new Error(`Failed to fetch username: ${usernameResponse.statusText}`);
@@ -340,7 +341,7 @@
 
             try {
                 // Sending the message
-                const response = await fetch(`http://localhost:5500/anonymousMessages/send/${userId}`, {
+                const response = await fetch(`${API_URL}/anonymousMessages/send/${userId}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

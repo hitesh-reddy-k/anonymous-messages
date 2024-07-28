@@ -1,3 +1,6 @@
+const API_URL = process.env.REACT_APP_API_URL;
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const feedbackForm = document.getElementById('feedback-form');
 
@@ -14,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-           const response = await fetch('http://localhost:5500/anonymousMessages/submit', {
+           const response = await fetch('${API_URL}/anonymousMessages/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,3 +1,6 @@
+
+const API_URL = process.env.REACT_APP_API_URL;
+
 document.addEventListener("DOMContentLoaded", () => {
     const linkInput = document.getElementById("link-input");
     const searchButton = document.getElementById("search-button");
@@ -25,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (userId) {
             try {
-                const response = await fetch(`http://localhost:5500/anonymousMessages/username/${userId}`);
+                const response = await fetch(`${API_URL}/anonymousMessages/username/${userId}`);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch username: ${response.statusText}`);
                 }
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const message = messageInput.value.trim();
                         if (message) {
                             try {
-                                const sendMessageResponse = await fetch(`http://localhost:5500/anonymousMessages/send/${userId}`, {
+                                const sendMessageResponse = await fetch(`${API_URL}/anonymousMessages/send/${userId}`, {
                                     method: "POST",
                                     headers: {
                                         'Content-Type': 'application/json'
