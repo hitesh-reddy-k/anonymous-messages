@@ -18,7 +18,7 @@ const newDir = currentDir.replace('backend', 'forentend');
 
 
 const corsOptions = {
-    origin: ['http://127.0.0.1:5500','https://anoniymous-messages.vercel.app','http://10.200.34.100:5500', 'https://anoniymous-messages.vercel.app' ,'http://192.168.137.1:5500'],
+    origin: ['http://127.0.0.1:5500','https://anoniymous-messages.vercel.app','http://10.200.34.100:5500', 'http://localhost:5500' ,'http://192.168.137.1:5500'],
     optionsSuccessStatus: 200,
     credentials: true
 };
@@ -34,7 +34,7 @@ app.use("/anonymousMessages", user);
 app.use("/anonymousMessages", message);
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('server is working in vercel');
 });
 
 app.get("/anonymousMessages/:reserverid",(req,res)=>{
