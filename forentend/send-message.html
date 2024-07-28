@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="send-message.css">
+    <title>Send Message</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Anonymous-Message</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li><a href="home.html" id="home-link">Home</a></li>
+                <li><a href="send-message.html" id="send-message-link">Send Secret Message</a></li>
+                <li><a href="feedbackfourm.html">Feedback</a></li>
+                
+                <li class="profile">
+                    <img src="/create-an-logo-for-a-companey-of-name-anonymous-messages-basically-the-anonymous-messages-is-the--489823626.png" alt="Profile" class="profile-img">
+                    <div class="dropdown-menu">
+                        <a href="me.html">Profile</a>
+                        <a id="deleteAccountLink" href="#" onclick="confirmDeleteAccount()">Delete Account</a>
+                        <a onclick="logout()" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+    <div class="search-container">
+        <form  class="form">
+            <button>
+                <svg width="17" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="search">
+                    <path d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9" stroke="currentColor" stroke-width="1.333" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </button>
+            <input id="link-input" class="input" placeholder="Enter the link" required="" type="text">
+            <button class="reset" type="reset">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </form>
+        <button class="btn" id="search-button">Search</button>
+    </div>
+
+    <!-- <div id="recommendation-container" style="display: none;">
+        <h3>Username: <span id="recommended-username"></span></h3>
+    </div> -->
+
+    <div id="send-message-container" style="display: none;">
+        <h2 class="headding" >Send an Anonymous Message</h2>
+        <div id="recommendation-container" style="display: none;">
+        <h3>Username: <span id="recommended-username"></span></h3>
+    </div>
+        <textarea class="messages" id="message-input" placeholder="Type your message here..."></textarea>
+        <button id="send-button">Send</button>
+    </div>
+</body>
+<script src="send-message.js"></script>
+<script src="home.js"></script>
+</html>

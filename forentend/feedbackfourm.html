@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="feedbackfourm.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="formContent">
+            <h2 class="active"> Feedback </h2>
+            <form id="feedback-form">
+                <input type="hidden" id="userId" value="USER_ID_FROM_BACKEND">
+                <div class="rating">
+                    <label>
+                        <input type="radio" name="rating" value="1"> 1 Star
+                    </label>
+                    <label>
+                        <input type="radio" name="rating" value="2"> 2 Stars
+                    </label>
+                    <label>
+                        <input type="radio" name="rating" value="3"> 3 Stars
+                    </label>
+                    <label>
+                        <input type="radio" name="rating" value="4"> 4 Stars
+                    </label>
+                    <label>
+                        <input type="radio" name="rating" value="5"> 5 Stars
+                    </label>
+                </div>
+                <textarea id="comment" name="comment" placeholder="Write your feedback here..." rows="4"></textarea>
+                <input type="submit" value="Submit Feedback">
+            </form>
+            <div id="formFooter">
+                <a class="underlineHover" href="home.html">Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="feedbackfourm.js"></script>
+</html>

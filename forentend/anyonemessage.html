@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Anonymous Message</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+            color: white;
+        }
+
+        body {
+            background: #f4f4f4;
+        }
+
+        header {
+            background-color: #1a202c;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 30px;
+            font-weight: 700;
+            font-family: "Pacifico", cursive;
+            color: white;
+        }
+
+        header nav ul {
+            display: flex;
+            align-items: center;
+            font-family: "Kalnia Glaze", serif;
+            color: white;
+        }
+
+        header nav ul li a {
+            display: inline-block;
+            color: #333;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        header nav ul li a:hover,
+        header nav ul li a.active {
+            border-color: rgb(126, 190, 254);
+            background: rgba(0, 0, 255, 0.1);
+            color: rgb(104, 174, 243);
+        }
+
+        header nav ul li.profile {
+            position: relative;
+        }
+
+        header nav ul li.profile .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 16px;
+            border: 2px solid #ddd;
+            transition: border-color 0.3s ease;
+        }
+
+        header nav ul li.profile .profile-img:hover {
+            border-color: dodgerblue;
+        }
+
+        header nav ul li.profile .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: #1a202c;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        header nav ul li.profile .dropdown-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        header nav ul li.profile .dropdown-menu a:hover {
+            background: dodgerblue;
+            color: #fff;
+        }
+
+        header nav ul li.profile:hover .dropdown-menu {
+            display: block;
+        }
+
+        .hamburger {
+            cursor: pointer;
+            display: none;
+        }
+
+        .hamburger div {
+            width: 30px;
+            height: 3px;
+            margin: 5px 0;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        @media only screen and (max-width: 900px) {
+            header {
+                padding: 0 30px;
+            }
+        }
+
+        @media only screen and (max-width: 700px) {
+            .hamburger {
+                display: block;
+            }
+
+            header nav {
+                position: absolute;
+                width: 100%;
+                left: -100%;
+                top: 70px;
+                background:  #1a202c;
+                padding: 30px;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            header #nav_check:checked ~ nav {
+                left: 0;
+            }
+
+            header nav ul {
+                display: block;
+            }
+
+            header nav ul li a {
+                margin: 5px 0;
+            }
+        }
+
+        body {
+            background-color: #364c77;
+        }
+
+        #send-message-container {
+            margin: 20px;
+            text-align: center;
+            color: black;
+        }
+
+        .headding {
+            font-family: "Kalnia Glaze", serif;
+            text-align: center;
+            margin: 48px;
+        }
+
+        /* Updated styles for textarea and button */
+        textarea.messages {
+            width: 80%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ecf0f1;
+            background-color: wheat;
+            color: #e2e8f0;
+            resize: none;
+            font-size: 16px;
+            font-family: "Kalnia Glaze", serif;
+            margin-bottom: 20px;
+        }
+
+        textarea.messages:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        #send-button {
+            margin-top: 25px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fefeff;
+            color: #ecf0f1;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: "Kalnia Glaze", serif;
+        }
+
+        #send-button:hover {
+            background-color: #2ecc71;
+        }
+
+        .btn {
+            --color: #3999ac;
+            --color2: rgb(10, 25, 30);
+            padding: 0.8em 1.75em;
+            background-color: transparent;
+            border-radius: 6px;
+            border: 0.3px solid var(--color);
+            transition: 0.5s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            z-index: 1;
+            font-weight: 300;
+            font-size: 17px;
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            text-transform: uppercase;
+            color: var(--color);
+            left: 1pc;
+        }
+
+        .btn::after,
+        .btn::before {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 100%;
+            transform: skew(90deg) translate(-50%, -50%);
+            position: absolute;
+            inset: 50%;
+            left: 25%;
+            z-index: -1;
+            transition: 0.5s ease-out;
+            background-color: var(--color);
+        }
+
+        .btn::before {
+            top: -50%;
+            left: -25%;
+            transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+        }
+
+        .btn:hover::after {
+            transform: skew(45deg) translate(-50%, -50%);
+        }
+
+        .btn:hover {
+            color: var(--color2);
+        }
+
+        .btn:active {
+            filter: brightness(0.7);
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Anonymous-Message</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <button class="btn" id="about-link">Login</button>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+
+    <div id="send-message-container">
+        <h2 class="headding">Send an Anonymous Message</h2>
+        <div id="recommendation-container" style="display: none;">
+            <h3>Username: <span id="recommended-username"></span></h3>
+        </div>
+        <form id="messageForm">
+            <textarea class="messages" id="message" placeholder="Type your message here..."></textarea>
+            <button class="btn" id="send-button" type="submit">Send</button>
+        </form>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const pathArray = window.location.pathname.split('/');
+        const userId = pathArray[pathArray.length - 1]; // Correctly get userId from URL
+        const recommendedUsername = document.getElementById("recommended-username");
+        const recommendationContainer = document.getElementById("recommendation-container");
+        const sendMessageContainer = document.getElementById("send-message-container");
+
+        async function fetchUsername(userId) {
+            try {
+                const usernameResponse = await fetch(`http://localhost:5500/anonymousMessages/username/${userId}`);
+                
+                if (!usernameResponse.ok) {
+                    throw new Error(`Failed to fetch username: ${usernameResponse.statusText}`);
+                }
+
+                const data = await usernameResponse.json();
+
+                if (data.username) {
+                    recommendedUsername.textContent = data.username;
+                    recommendationContainer.style.display = "block";
+                    sendMessageContainer.style.display = "block";
+                } else {
+                    console.warn("Username not found in the response data.");
+                }
+            } catch (error) {
+                console.error("Error fetching username:", error);
+                alert("Server error while fetching username");
+            }
+        }
+
+        document.getElementById("messageForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const message = document.getElementById("message").value;
+
+            if (!message || !userId) {
+                alert("All fields are required");
+                return;
+            }
+
+            try {
+                // Sending the message
+                const response = await fetch(`http://localhost:5500/anonymousMessages/send/${userId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ userId, message })
+                });
+
+                if (response.ok) {
+                    alert("Message sent successfully!");
+                    document.getElementById("messageForm").reset();
+                } else {
+                    alert("Failed to send message");
+                }
+
+                // Fetching the username
+                if (userId) {
+                    await fetchUsername(userId);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Server error");
+            }
+        });
+
+        document.getElementById("about-link").onclick = function () {
+            location.href = "http://127.0.0.1:5500/forentend/login.html";
+        };
+
+        // Fetch username initially if userId is available
+        if (userId) {
+            fetchUsername(userId);
+        }
+    });
+</script>
+    
+</body>
+
+</html>
