@@ -17,7 +17,7 @@ const currentDir = __dirname;
 const newDir = currentDir.replace('backend', 'forentend');
 
 const corsOptions = {
-    origin: ['https://anoniymous-messages.vercel.app'],
+    origin: 'https://anoniymous-messages.vercel.app',
     optionsSuccessStatus: 200,
     credentials: true
 };
