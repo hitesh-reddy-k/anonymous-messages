@@ -10,6 +10,9 @@ const message = require("../backend/router/messageroute");
 
 dotenv.config({ path: "backend/env/config.env" });
 
+const currentDir = __dirname;
+const newDir = currentDir.replace('backend', 'forentend');
+
 const app = express();
 app.use(express.static(path.join(__dirname, 'frontend')));
 
@@ -33,7 +36,7 @@ app.get('/', (req, res) => {
 
 app.get("/anonymousMessages/:reserverid", (req, res) => {
     console.log("Reserver ID:", req.params.reserverid);
-  res.sendFile(path.join(__dirname,'anyonemessage.html'));
+  res.sendFile(path.join(newDir, 'anyonemessage.html'));
 });
 
 // Improved error handling middleware
