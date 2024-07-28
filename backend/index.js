@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/anonymousMessages/:reserverid", (req, res) => {
+    console.log("Reserver ID:", req.params.reserverid);
   res.sendFile(path.join(__dirname, 'frontend', 'anyonemessage.html'));
 });
 
