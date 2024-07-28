@@ -20,7 +20,7 @@
   ],
   "functions": {
     "api/*.js": {
-      "maxDuration": 40
+      "maxDuration": 30
     }
   }
 }
