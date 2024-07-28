@@ -13,8 +13,6 @@ dotenv.config({ path: "backend/env/config.env" });
 const app = express();
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-
-
 const corsOptions = {
   origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
   optionsSuccessStatus: 200,
@@ -34,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/anonymousMessages/:reserverid", (req, res) => {
-  res.sendFile(path.join(__dirname, 'anyonemessage.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'anyonemessage.html'));
 });
 
 // Improved error handling middleware
@@ -48,7 +46,6 @@ app.use(express.json());
 Connect()
   .then(() => {
     console.log("Connected to database:", process.env.URL);
-    console.log(newDir);
   })
   .catch(err => {
     console.error("Failed to connect to database", err);
