@@ -13,8 +13,7 @@ dotenv.config({ path: "backend/env/config.env" });
 const app = express();
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-const currentDir = __dirname;
-const newDir = currentDir.replace('backend', 'frontend');
+
 
 const corsOptions = {
   origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
@@ -35,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/anonymousMessages/:reserverid", (req, res) => {
-  res.sendFile(path.join(newDir, 'anyonemessage.html'));
+  res.sendFile(path.join(__dirname, 'anyonemessage.html'));
 });
 
 // Improved error handling middleware
