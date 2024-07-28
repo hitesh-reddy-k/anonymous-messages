@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function extractUserIdFromLink(link) {
-        const urlPattern = /http:\/\/localhost:5500\/anonymousMessages\/([a-fA-F0-9]{24})/;
+        const urlPattern = /https:\/\/anoniymousmessages.vercel.app\/anonymousMessages\/([a-fA-F0-9]{24})/;
         const match = link.match(urlPattern);
         return match ? match[1] : null;
     }
