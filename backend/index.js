@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 
 app.get("/anonymousMessages", (req, res) => {
     console.log("Reserver ID:", req.params.reserverid);
-  res.sendFile(path.join(newDir, 'anyonemessage.html'));
+    res.redirect('https://anoniymousmessages.vercel.app/login.html');
 });
 
 // Improved error handling middleware
