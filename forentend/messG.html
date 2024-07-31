@@ -273,7 +273,7 @@ textarea.messages:focus {
 </head>
 <body>
     <header>
-        <div class="logo">anonymous-Message</div>
+        <div class="logo">Anonymous Messages</div>
         <input type="checkbox" id="nav_check" hidden>
         <nav>
             <ul>
@@ -286,7 +286,6 @@ textarea.messages:focus {
             <div></div>
         </label>
     </header>
-    
 
     <div id="recommendation-container" style="display: none;">
         <h3>Username: <span id="recommended-username"></span></h3>
@@ -299,88 +298,106 @@ textarea.messages:focus {
             <button class="btn" id="send-button" type="submit">Send</button>
         </form>
     </div>
-    <script >document.addEventListener('DOMContentLoaded', function () {
-        const pathArray = window.location.pathname.split('/');
-        const reserverId = pathArray[pathArray.length - 1];
-        const recommendedUsername = document.getElementById("recommended-username");
-        const recommendationContainer = document.getElementById("recommendation-container");
-        const sendMessageContainer = document.getElementById("send-message-container");
-    
-        console.log("Reserver ID from URL:", reserverId);
-    
-        async function fetchUsername(reserverId) {
-            try {
-                const usernameResponse = await fetch(`https://anoniymous-messages-server.vercel.app/anonymousMessages/username/${reserverId}`);
-                
-                if (!usernameResponse.ok) {
-                    throw new Error(`Failed to fetch username: ${usernameResponse.statusText}`);
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pathArray = window.location.pathname.split('/');
+            const reserverId = pathArray[pathArray.length - 1];
+            const recommendedUsername = document.getElementById("recommended-username");
+            const recommendationContainer = document.getElementById("recommendation-container");
+            const sendMessageContainer = document.getElementById("send-message-container");
+
+            console.log("Reserver ID from URL:", reserverId);
+
+            async function fetchUsername(reserverId) {
+                try {
+                    const usernameResponse = await fetch(`https://anoniymous-messages-server.vercel.app/anonymousMessages/username/${reserverId}`);
+
+                    if (!usernameResponse.ok) {
+                        throw new Error(`Failed to fetch username: ${usernameResponse.statusText}`);
+                    }
+
+                    const data = await usernameResponse.json();
+                    console.log("Fetched username data:", data);
+
+                    if (data.username) {
+                        recommendedUsername.textContent = data.username;
+                        recommendationContainer.style.display = "block";
+                        sendMessageContainer.style.display = "block";
+                    } else {
+                        console.warn("Username not found in the response data.");
+                    }
+                } catch (error) {
+                    console.error("Error fetching username:", error);
+                    displayError("Server error while fetching username");
                 }
-    
-                const data = await usernameResponse.json();
-                console.log("Fetched username data:", data); // Debugging
-    
-                if (data.username) {
-                    recommendedUsername.textContent = data.username; // Use `data.username`
-                    recommendationContainer.style.display = "block";
-                    sendMessageContainer.style.display = "block";
-                } else {
-                    console.warn("Username not found in the response data.");
-                }
-            } catch (error) {
-                console.error("Error fetching username:", error);
-                alert("Server error while fetching username");
             }
-        }
-    
-        document.getElementById("messageForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-    
-            const message = document.getElementById("message").value;
-    
-            console.log("Message from form:", message);
-    
-            if (!message || !reserverId) {
-                alert("All fields are required");
-                return;
-            }
-    
-            try {
-                // Sending the message
-                const response = await fetch(`https://anoniymous-messages-server.vercel.app/send/${reserverId}`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ reserverId, message })
-                });
-    
-                if (response.ok) {
-                    alert("Message sent successfully!");
-                    document.getElementById("messageForm").reset();
-                } else {
-                    alert("Failed to send message");
+
+            document.getElementById("messageForm").addEventListener("submit", async function(event) {
+                event.preventDefault();
+
+                const message = document.getElementById("message").value;
+
+                console.log("Message from form:", message);
+
+                if (!message || !reserverId) {
+                    displayError("All fields are required");
+                    return;
                 }
-    
-                // Fetching the username
-                if (reserverId) {
-                    await fetchUsername(reserverId);
+
+                try {
+                    const response = await fetch(`https://anoniymous-messages-server.vercel.app/send/${reserverId}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ reserverId, message })
+                    });
+
+                    if (response.ok) {
+                        displaySuccess("Message sent successfully!");
+                        document.getElementById("messageForm").reset();
+                    } else {
+                        displayError("Failed to send message");
+                    }
+
+                    if (reserverId) {
+                        await fetchUsername(reserverId);
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    displayError("Server error");
                 }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Server error");
+            });
+
+            document.getElementById("about-link").onclick = function () {
+                location.href = "https://anoniymousmessages.vercel.app/login.html";
+            };
+
+            if (reserverId) {
+                fetchUsername(reserverId);
             }
         });
-    
-        document.getElementById("about-link").onclick = function () {
-            location.href = "https://anoniymousmessages.vercel.app/login.html";
-        };
-    
-        // Correctly calling fetchUsername with reserverId
-        if (reserverId) {
-            fetchUsername(reserverId);
-        }
-    });</script>
 
-    
+        function displayError(message) {
+            const errorElement = document.createElement("div");
+            errorElement.textContent = message;
+            errorElement.style.color = "red";
+            document.body.appendChild(errorElement);
+            setTimeout(() => {
+                errorElement.remove();
+            }, 3000);
+        }
+
+        function displaySuccess(message) {
+            const successElement = document.createElement("div");
+            successElement.textContent = message;
+            successElement.style.color = "green";
+            document.body.appendChild(successElement);
+            setTimeout(() => {
+                successElement.remove();
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
