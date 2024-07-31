@@ -39,7 +39,7 @@ app.get('/', (req, res) => {
 app.get("/anonymousMessages/:reserverid", (req, res) => {
   const reserverId = req.params.reserverid;
   console.log("Reserver ID:", reserverId);
-  const filePath = path.join(newDir, 'mess.html'); 
+  const filePath = path.join(newDir, 'messs.html'); 
 
   res.sendFile(filePath, (err) => {
     if (err) {
