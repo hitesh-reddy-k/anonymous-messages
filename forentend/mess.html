@@ -287,12 +287,13 @@ textarea.messages:focus {
         </label>
     </header>
 
-    <div id="recommendation-container" style="display: none;">
-        <h3>Username: <span id="recommended-username"></span></h3>
-    </div>
+    
 
     <div id="send-message-container">
         <h2 class="headding">Send an Anonymous Message</h2>
+        <div id="recommendation-container" style="display: none;">
+            <h3>Username: <span id="recommended-username"></span></h3>
+        </div>
         <form id="messageForm">
             <textarea class="messages" id="message" placeholder="Type your message here..."></textarea>
             <button class="btn" id="send-button" type="submit">Send</button>
