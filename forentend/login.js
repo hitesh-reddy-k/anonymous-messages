@@ -1,10 +1,11 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = document.getElementById("password");
     const openEyesImage = document.getElementById("icon");
     const closedEyesImage = document.getElementById("closed-eyes");
     const loginForm = document.getElementById("login-form");
+    const loginButton = document.getElementById("loginButton");
+    const spinner = document.getElementById("spinner");
+    const buttonText = document.getElementById("buttonText");
 
     passwordInput.addEventListener("focus", function() {
         openEyesImage.classList.add("hide");
@@ -36,6 +37,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const email = document.querySelector('#login').value;
         const password = document.querySelector('#password').value;
 
+        // Show spinner and disable login button
+        spinner.classList.remove('hide');
+        buttonText.classList.add('hide');
+        loginButton.disabled = true;
+
         try {
             const response = await fetch('https://anoniymous-messages-server.vercel.app/anonymousMessages/login', {
                 method: 'POST',
@@ -60,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('userId', result.user.id);
                 localStorage.setItem('role', result.user.role);
-                localStorage.setItem('username',result.user.username)
+                localStorage.setItem('username', result.user.username);
                 console.log('Stored role in local storage:', result.user.role);
 
                 // Double-check the role in the response
@@ -81,6 +87,11 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             console.error('Error during login:', error);
             handleLoginFailure();
+        } finally {
+            // Hide spinner and enable login button
+            spinner.classList.add('hide');
+            buttonText.classList.remove('hide');
+            loginButton.disabled = false;
         }
     });
 

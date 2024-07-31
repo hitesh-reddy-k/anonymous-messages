@@ -48,7 +48,6 @@ function displayMessages(messages) {
         messageElement.innerHTML = `
             <h3 class="message-text"><p>${message.message}</p></h3>
             <p class="timestamp">${formattedDate} ${formattedTime}</p>
-             <button class="btn" id="screenshotBtn">Take Screenshot</button>
         `;
         messagesContainer.appendChild(messageElement);
     });

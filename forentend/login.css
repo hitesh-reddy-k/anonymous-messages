@@ -243,8 +243,23 @@ input[type=text]::placeholder, input[type=password]::placeholder {
 
 .fadeIn.fourth {
   -webkit-animation-delay: 1s;
-  -moz-animation-delay: 1s;
-  animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    animation-delay: 1s;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    margin-left: 70px;
+    background-color: hsl(187, 72%, 64%);
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    height: 70px;
+    width: 285px;
+    color: white;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 114px;
 }
 
 .underlineHover:after {
@@ -253,7 +268,7 @@ input[type=text]::placeholder, input[type=password]::placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #56baed;
+  background-color: hsl(0, 100%, 47%);
   content: "";
   transition: width 0.2s;
 }
@@ -308,4 +323,6 @@ input[type=text]::placeholder, input[type=password]::placeholder {
   .incorrect {
     filter: invert(100%); 
   }
-  
+  .buttonText{
+    text-align: center;
+  }
