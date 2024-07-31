@@ -8,12 +8,14 @@ const Connect = require("../backend/connectdatabase/mongodb");
 const user = require("../backend/router/userroute");
 const message = require("../backend/router/messageroute");
 
+const app = express();
+
 dotenv.config({ path: "backend/env/config.env" });
 
 const currentDir = __dirname;
 const newDir = currentDir.replace('backend', 'forentend');
 
-const app = express();
+
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 const corsOptions = {
