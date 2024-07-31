@@ -16,7 +16,7 @@ const currentDir = __dirname;
 const newDir = currentDir.replace('backend', 'forentend');
 
 
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(newDir))
 
 const corsOptions = {
   origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
@@ -36,9 +36,14 @@ app.get('/', (req, res) => {
   res.send('Server is working in Vercel');
 });
 
-app.get("/anonymousMessages", (req, res) => {
-    console.log("Reserver ID:", req.params.reserverid);
-    res.redirect('https://anoniymousmessages.vercel.app/anyonemessage.html');
+app.get("/anonymousMessages/:reserverid", (req, res) => {
+  const reserverId = req.params.reserverid;
+  console.log("Reserver ID:", reserverId);
+  res.sendFile(path.join(newDir, 'anyonemessage.html'), (err) => {
+      if (err) {
+          res.status(500).send(err);
+      }
+  });
 });
 
 
