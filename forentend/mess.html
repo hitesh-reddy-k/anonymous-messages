@@ -292,8 +292,8 @@ textarea.messages:focus {
     <div id="send-message-container">
         <h2 class="headding">Send an Anonymous Message</h2>
         <div id="recommendation-container" style="display: none;">
-            <h3>Username: <span id="recommended-username"></span></h3>
-        </div>
+        <h3>Username: <span id="recommended-username"></span></h3>
+    </div>
         <form id="messageForm">
             <textarea class="messages" id="message" placeholder="Type your message here..."></textarea>
             <button class="btn" id="send-button" type="submit">Send</button>
@@ -347,7 +347,7 @@ textarea.messages:focus {
                 }
 
                 try {
-                    const response = await fetch(`https://anoniymous-messages-server.vercel.app/send/${reserverId}`, {
+                    const response = await fetch(`https://anoniymousmessages.vercel.app/send/${reserverId}`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
