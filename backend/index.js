@@ -13,7 +13,7 @@ const app = express();
 dotenv.config({ path: "backend/env/config.env" });
 
 const currentDir = __dirname;
-const newDir = currentDir.replace('backend', 'forentend');
+const newDir = path.join(currentDir, '..', 'forentend');
 
 
 app.use(express.static(newDir))
@@ -39,12 +39,15 @@ app.get('/', (req, res) => {
 app.get("/anonymousMessages/:reserverid", (req, res) => {
   const reserverId = req.params.reserverid;
   console.log("Reserver ID:", reserverId);
-  res.sendFile(path.join(newDir, 'anyonemessage.html'), (err) => {
-      if (err) {
-          res.status(500).send(err);
-      }
+  const filePath = path.join(newDir, 'anyonemessage.html'); // Ensure the correct file path
+
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
   });
 });
+
 
 
 app.use((err, req, res, next) => {
