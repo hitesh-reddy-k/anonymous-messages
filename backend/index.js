@@ -20,13 +20,12 @@ app.use(express.static(newDir))
 
 const corsOptions = {
   origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   optionsSuccessStatus: 200,
   credentials: true
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
