@@ -347,7 +347,7 @@ textarea.messages:focus {
                 }
 
                 try {
-                    const response = await fetch(`https://anoniymousmessages.vercel.app/send/${reserverId}`, {
+                    const response = await fetch(`https://anoniymous-messages-server.vercel.app/anonymousMessages/send/${reserverId}`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
