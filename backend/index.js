@@ -1,70 +1,71 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const Connect = require("../backend/databacesonnect/data.js");
-const questions = require("../backend/routes/questionsroute.js");
 const cors = require("cors");
 const path = require("path");
-const user = require("../backend/routes/userroute.js");
-const marks = require("../backend/routes/sem-marksroute.js");
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const messages = require("../backend/routes/message.js");
-const community = require("../backend/routes/communityroute.js");
+const Connect = require("../backend/connectdatabase/mongodb");
+const user = require("../backend/router/userroute");
+const message = require("../backend/router/messageroute");
 
 const app = express();
-const port = 3000;
 
-// CORS options
+dotenv.config({ path: "backend/env/config.env" });
+
+const currentDir = __dirname;
+const newDir = path.join(currentDir, '..', 'forentend');
+
+
+app.use(express.static(newDir))
+
 const corsOptions = {
-    origin: [
-         "*",
-    ],
-    optionsSuccessStatus: 200,
-    credentials: true // Allow cookies and credentials
+  origin: ['https://anoniymous-messages.vercel.app', 'http://127.0.0.1:5500'],
+  optionsSuccessStatus: 200,
+  credentials: true
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Preflight request handling
 
-// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use("/anonymousMessages", user);
+app.use("/anonymousMessages", message);
+
+app.get('/', (req, res) => {
+  res.send('Server is working in Vercel');
+});
+
+app.get("/anonymousMessages/:reserverid", (req, res) => {
+  const reserverId = req.params.reserverid;
+  console.log("Reserver ID:", reserverId);
+  const filePath = path.join(newDir, 'messs.html'); 
+
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
+
+
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).json({ error: 'Internal Server Error', details: err.message });
+});
+
 app.use(express.json());
 
-// Serve static files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+Connect()
+  .then(() => {
+    console.log("Connected to database:", process.env.URL);
+  })
+  .catch(err => {
+    console.error("Failed to connect to database", err);
+  });
 
-// Add CORS headers explicitly (optional)
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://collage-repo-1-001.vercel.app');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    next();
-});
-
-// Routes
-app.use("/question", questions);
-app.use("/student", user);
-app.use("/messages", messages);
-app.use("/community", community);
-app.use("/marks", marks);
-
-// Test route
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
-// Load environment variables
-dotenv.config({ path: "backend/envfile/config.env" });
-console.log("MongoDB URL:", process.env.URL);
-
-// Connect to the database
-Connect();
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`);
+app.listen(process.env.PORT || 5500, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT || 5500}`)
 });
