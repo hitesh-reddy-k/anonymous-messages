@@ -17,9 +17,7 @@ const port = 3000;
 // CORS options
 const corsOptions = {
     origin: [
-        'http://127.0.0.1:5500', // Local development
-        'https://collage-repo-1.vercel.app', // Backend URL
-        'https://collage-repo-1-001.vercel.app' // Frontend URL
+         "*",
     ],
     optionsSuccessStatus: 200,
     credentials: true // Allow cookies and credentials
